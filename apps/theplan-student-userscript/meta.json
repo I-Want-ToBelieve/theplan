@@ -1,0 +1,12 @@
+{
+  "namespace": "github.com/I-Want-ToBelieve",
+  "copyright": "2024, I-Want-ToBelieve (https://github.com/I-Want-ToBelieve)",
+  "require": [],
+  "include": [
+    "https://www.makcoocode.com/*",
+    "https://gui.makcoocode.com/*",
+    "https://b.xiaomai5.com/*"
+  ],
+  "run-at": "document-start",
+  "grant": ["GM.setValue", "GM.getValue", "GM.registerMenuCommand"]
+}

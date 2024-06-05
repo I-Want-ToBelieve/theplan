@@ -1,3 +1,8 @@
+/* eslint-disable no-void */
+/* eslint-disable no-eval */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable n/handle-callback-err */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable no-undef */
 /**  globals GM */
 
@@ -5,13 +10,13 @@
 ;(function () {
   const hosts = {
     default: 'localhost',
-    remote: '192.168.0.121',
+    remote: '192.168.0.121'
   }
   const url = `http://${hosts.remote}:%PORT%/bundle.user.js?${Date.now()}`
-  new Promise(function loadBundleFromServer(resolve, reject) {
+  new Promise(function loadBundleFromServer (resolve, reject) {
     const req = GM.xmlHttpRequest({
       method: 'GET',
-      url: url,
+      url,
       onload: function (r) {
         if (r.status !== 200) {
           reject(r)
@@ -19,7 +24,7 @@
         }
         resolve(r.responseText)
       },
-      onerror: (e) => reject(e),
+      onerror: (e) => { reject(e) }
     })
     if (req && 'catch' in req) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -65,7 +70,6 @@
     })
     .then(function (s) {
       if (s) {
-
         eval(`${s} //# sourceURL=${url}`)
         GM.setValue('scriptlastsource4948218', s)
       }

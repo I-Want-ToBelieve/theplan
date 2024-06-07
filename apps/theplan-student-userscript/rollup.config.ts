@@ -1,6 +1,5 @@
 import fs from 'node:fs'
 
-
 import babel from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
@@ -28,24 +27,25 @@ export default defineConfig({
       '*/\n\n/* globals React, ReactDOM */',
     sourcemap: true,
     globals: {
-      react: 'React',
-      'react-dom': 'ReactDOM',
-    },
+
+    }
   },
   plugins: [
     json(),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production'),
       ENVIRONMENT: JSON.stringify('production'),
-      preventAssignment: true,
+      preventAssignment: true
     }),
-    nodeResolve({ extensions: ['.js', '.ts', '.tsx'] }),
+    nodeResolve({ extensions: ['.js', '.ts', '.tsx'], browser: true }),
     typescriptPlugin({ typescript }),
     commonjs({
-      include: ['node_modules/**'],
+
     }),
     babel({
+      include: ['**.js', 'node_modules/**'],
       babelHelpers: 'bundled',
+      presets: ['@babel/preset-env']
     }),
     tscAlias(),
     metablock({
@@ -56,11 +56,11 @@ export default defineConfig({
         description: pkg.description,
         homepage: pkg.homepage,
         author: pkg.author,
-        license: pkg.license,
-      },
-    } as any),
+        license: pkg.license
+      }
+    } as any)
   ],
-  external(id) {
+  external (id) {
     return /^react(-dom)?$/.test(id)
-  },
+  }
 })

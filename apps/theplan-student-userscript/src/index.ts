@@ -2,6 +2,29 @@
 // import { ajaxHooker } from './ajaxHooker1.3.3'
 import { observe } from '@violentmonkey/dom'
 
+import { Manager } from 'socket.io-client'
+
+const manager = new Manager('ws://127.0.0.1:3000')
+const socket = manager.socket('/')
+
+socket.on('connect', () => {
+  console.log(`connect ${socket.id}`)
+})
+
+setInterval(() => {
+  socket.emit('ping', () => {
+    console.log('pong')
+  })
+}, 10000)
+
+socket.on('disconnect', () => {
+  console.log('disconnect')
+})
+
+setTimeout(() => {
+  socket.emit('hello')
+}, 15000)
+
 export const isXiaoMai = window.location.origin === 'https://b.xiaomai5.com'
 export const isMakcooCode = window.location.origin.includes('makcoocode.com')
 

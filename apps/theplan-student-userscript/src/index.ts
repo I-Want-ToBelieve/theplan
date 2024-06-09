@@ -1,11 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 // import { ajaxHooker } from './ajaxHooker1.3.3'
-import { observe } from '@violentmonkey/dom'
 
 import { Manager } from 'socket.io-client'
 
-const manager = new Manager('ws://127.0.0.1:3000')
+import { isXiaoMai, isMakcooCode } from '@/utils/constant'
+import { removeBadLock } from '@/features/remove-bad-lock'
+
+const bigboy = '127.0.0.1'
+const manager = new Manager(`ws://${bigboy}:3000`, {
+  autoConnect: false,
+  transports: ['websocket']
+})
 const socket = manager.socket('/')
+socket.auth = { username: '' }
+// socket.connect()
 
 socket.on('connect', () => {
   console.log(`connect ${socket.id}`)
@@ -25,8 +33,7 @@ setTimeout(() => {
   socket.emit('hello')
 }, 15000)
 
-export const isXiaoMai = window.location.origin === 'https://b.xiaomai5.com'
-export const isMakcooCode = window.location.origin.includes('makcoocode.com')
+
 
 export const main = async () => {
   console.log('hello', window.location.origin, isXiaoMai, isMakcooCode)
@@ -34,24 +41,7 @@ export const main = async () => {
   if (isXiaoMai) {
     //
   } else if (isMakcooCode) {
-    const timer = setInterval(() => {
-      const node = document.querySelector('.share > div:nth-child(1)')
-
-      if (node && node.textContent === '认真听课，不要动鼠标哦') {
-        node.remove()
-      }
-    }, 1e3)
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const disconnect = observe(document.body, () => {
-      // Find the target node
-      const node = document.querySelector('.share > div:nth-child(1)')
-
-      if (node && node.textContent === '认真听课，不要动鼠标哦') {
-        window.clearInterval(timer)
-        node.remove()
-      }
-    })
+    removeBadLock()
   }
 
   console.log('hello end')

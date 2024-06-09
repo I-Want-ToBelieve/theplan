@@ -30,6 +30,7 @@ export default defineConfig({
 
     }
   },
+
   plugins: [
     json(),
     replace({

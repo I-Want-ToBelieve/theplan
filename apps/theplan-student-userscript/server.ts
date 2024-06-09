@@ -1,3 +1,5 @@
+/* eslint-disable */
+// ts-ignore
 import fs from 'node:fs'
 import http from 'node:http'
 import { createRequire } from 'node:module'
@@ -30,9 +32,9 @@ const hyperlink = (url: string, title?: string) =>
 fs.mkdir('dist/', { recursive: true }, () => null)
 
 // Start web server
-const server = http.createServer((request, response) => {
-  return handler(request, response, {
-    public: destDir,
+const server = http.createServer(async (request, response) => {
+  await handler(request, response, {
+    public: destDir
   })
 })
 server.listen(port, () => {
@@ -72,12 +74,12 @@ const devMetablock = await metablock({
     homepage: pkg.homepage,
     author: pkg.author,
     license: pkg.license,
-    grant: grants,
-  },
+    grant: grants
+  }
 })
 
 const result = devMetablock.renderChunk(devScriptContent, null, {
-  sourcemap: false,
+  sourcemap: false
 })
 const outContent = typeof result === 'string' ? result : result.code
 fs.writeFileSync(devScriptOutFile, outContent)
@@ -86,9 +88,8 @@ console.log(
     hyperlink(`http://127.0.0.1:${port}/${devScriptInFile}`)
 )
 
-
 loadConfigFile(path.resolve(__dirname, 'rollup.config.ts'), {
-  configPlugin: 'typescript',
+  configPlugin: 'typescript'
 }).then(async ({ options }: { options }) => {
   // Start rollup watch
   const watcher = rollup.watch(options)

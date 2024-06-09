@@ -8,5 +8,9 @@
     "https://b.xiaomai5.com/*"
   ],
   "run-at": "document-start",
-  "grant": ["GM.setValue", "GM.getValue", "GM.registerMenuCommand"]
+  "grant": [
+    "GM.setValue",
+    "GM.getValue",
+    "GM.registerMenuCommand"
+  ]
 }

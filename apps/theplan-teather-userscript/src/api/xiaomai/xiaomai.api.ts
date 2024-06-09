@@ -1,10 +1,11 @@
-import { XIAOMAI_API_URL } from '@/vanillajs/constant'
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { XIAOMAI_API_URL } from '@/utils/constant'
 
 export const getCurrentTeacherTimetableGroups = async (
   { version, token, uid, id, xmVersion, instId, name },
   prefix = XIAOMAI_API_URL
 ) => {
-  return fetch(
+  return await fetch(
     `${prefix}/public/timetable/inst/card?p=w&v=${version}&userType=B&token=${token}&uid=${uid}&tid=${id}&aid=${id}`,
     {
       credentials: 'omit',
@@ -21,20 +22,20 @@ export const getCurrentTeacherTimetableGroups = async (
         p: 'w',
         deviceType: 'w',
         bizAccountId: id,
-        uid: uid,
+        uid,
         tid: id,
-        token: token,
+        token,
         xmToken: token,
         vn: '5.7.0',
         project: 'xmzj-web-b',
-        xmVersion: xmVersion,
+        xmVersion,
         v: version,
-        instId: instId,
+        instId,
         'Sec-Fetch-Dest': 'empty',
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-site',
         cid: '',
-        orgAdminId: '',
+        orgAdminId: ''
       },
       referrer: 'https://b.xiaomai5.com/',
       body: `{"beginTime":${dayjs().valueOf()},"teacherIds":["${id}"],"courseNames":[],"className":[],"courseIds":[],"classIds":[],"teacherName":["${name}"],"classRoomIds":[],"classRoomName":[],"onlyReserve":false,"extraStuTypes":[],"studentId":"","startDate":${dayjs(
@@ -43,7 +44,7 @@ export const getCurrentTeacherTimetableGroups = async (
         dayjs(getCurrentWeek().endOfWeek).valueOf() - 999
       },"needFilterByRange":true,"timetableType":1,"isFilterHoliday":true,"needStuCountInfo":true,"needSignInfo":true,"scheduleRange":"ALL"}`,
       method: 'POST',
-      mode: 'cors',
+      mode: 'cors'
     }
   )
 }

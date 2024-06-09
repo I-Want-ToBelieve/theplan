@@ -57,6 +57,4 @@ export const main = async () => {
   console.log('hello end')
 }
 
-main().catch((e) => {
-  console.error(e)
-})
+void main()

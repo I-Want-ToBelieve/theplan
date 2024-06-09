@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { MAKCOO_API_URL } from '@/vanillajs/constant'
+import { MAKCOO_API_URL } from '@/utils/constant'
 
 export const getStudents = async (
   // eslint-disable-next-line @typescript-eslint/naming-convention

@@ -1,3 +1,4 @@
+// ts-ignore
 import { defineConfig } from 'tsup'
 import { $ } from 'execa'
 

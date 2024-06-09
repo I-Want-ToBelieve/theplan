@@ -1,4 +1,3 @@
-/* eslint-disable no-void */
 /* eslint-disable no-eval */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable n/handle-callback-err */
@@ -71,7 +70,7 @@
     .then(function (s) {
       if (s) {
         eval(`${s} //# sourceURL=${url}`)
-        GM.setValue('scriptlastsource4948218', s)
+        GM.setValue('scriptlastsource4948219', s)
       }
     })
     .finally(() => void 0)

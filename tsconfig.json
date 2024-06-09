@@ -24,5 +24,6 @@
     "composite": true,
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "include": ["./apps/**/**/*.ts"]
 }

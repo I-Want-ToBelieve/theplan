@@ -1,18 +1,49 @@
 {
   "name": "theplan-teather-userscript",
-  "version": "0.0.1",
-  "description": "theplan-teather-userscript",
+  "version": "0.0.0",
+  "description": "wip",
+  "keywords": [
+    "userscript",
+    "greasemonkey",
+    "tampermonkey",
+    "rollup",
+    "typescript",
+    "react"
+  ],
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/src/index.d.ts",
-  "scripts": {
-    "build": "tsup",
-    "type:check": "tsc --noemit",
-    "watch": "tsup --watch"
+  "homepage": "https://github.com/I-Want-ToBelieve/theplan",
+  "repository": {
+    "type": "git",
+    "url": "github:I-Want-ToBelieve/theplan"
+  },
+  "bugs": {
+    "url": "https://github.com/I-Want-ToBelieve/theplan/issues"
   },
   "author": "I-Want-ToBelieve",
   "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup --config rollup.config.ts --configPlugin typescript",
+    "watch": "rollup --config rollup.config.ts --configPlugin typescript --watch",
+    "serve": "pnpm dev",
+    "start": "pnpm dev",
+    "dev": "esno server.ts",
+    "build:release": "rollup --config rollup.config.ts --configPlugin typescript --sourcemap 0 --file dist/release-$npm_package_version.user.js",
+    "build:release:win32": "rollup --config rollup.config.ts --configPlugin typescript --sourcemap 0 --file dist\\release-%npm_package_version%.user.js",
+    "commit": "git-cz",
+    "lint": "eslint --cache \"src/**/*.{ts,tsx,js,jsx}\"",
+    "lint:fix": "pnpm lint --fix",
+    "version": "pnpm build:release && git add dist/release-$npm_package_version.user.js",
+    "prepublishOnly": "pnpm build:release && git add dist/release-$npm_package_version.user.js"
+  },
+  "config": {
+    "port": "18125"
+  },
   "dependencies": {
-    "conf": "^12.0.0"
+    "@violentmonkey/dom": "^2.1.7",
+    "socket.io-client": "^4.7.5"
   }
 }

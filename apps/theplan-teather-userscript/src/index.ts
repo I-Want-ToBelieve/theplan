@@ -39,7 +39,7 @@ export const main = async () => {
     //
   } else if (isMakcooCode) {
     batchAddStudent()
-    observableMemberInit.subscribe((v) => {
+    observableMemberInit.subscribe((v: any) => {
       socket.disconnect()
       const json = JSON.parse(v.response)
 

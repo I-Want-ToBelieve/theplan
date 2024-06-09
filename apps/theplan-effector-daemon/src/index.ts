@@ -17,7 +17,7 @@ const io = new Server<
 >(12178, {
   // options
   cors: {
-    origin: ['*']
+    origin: ['www.makcoocode.com']
   }
 })
 

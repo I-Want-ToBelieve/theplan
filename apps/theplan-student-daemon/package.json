@@ -12,7 +12,5 @@
   },
   "author": "I-Want-ToBelieve",
   "license": "MIT",
-  "dependencies": {
-    "conf": "^12.0.0"
-  }
+  "dependencies": {}
 }

@@ -5,15 +5,14 @@ import { Manager } from 'socket.io-client'
 
 import { isXiaoMai, isMakcooCode } from '@/utils/constant'
 import { removeBadLock } from '@/features/remove-bad-lock'
+import { observableMemberInit } from '@/features/hooks/hook-member-init'
 
-const bigboy = '127.0.0.1'
-const manager = new Manager(`ws://${bigboy}:3000`, {
+const local = '127.0.0.1'
+const manager = new Manager(`ws://${local}:12177`, {
   autoConnect: false,
   transports: ['websocket']
 })
 const socket = manager.socket('/')
-socket.auth = { username: '' }
-// socket.connect()
 
 socket.on('connect', () => {
   console.log(`connect ${socket.id}`)
@@ -33,8 +32,6 @@ setTimeout(() => {
   socket.emit('hello')
 }, 15000)
 
-
-
 export const main = async () => {
   console.log('hello', window.location.origin, isXiaoMai, isMakcooCode)
 
@@ -42,6 +39,19 @@ export const main = async () => {
     //
   } else if (isMakcooCode) {
     removeBadLock()
+    observableMemberInit.subscribe((v) => {
+      socket.disconnect()
+      const json = JSON.parse(v.response)
+
+      const data = json.data
+      console.log(json)
+
+      const { user_info: userInfo } = data
+
+      socket.auth = { userInfo }
+
+      socket.connect()
+    })
   }
 
   console.log('hello end')

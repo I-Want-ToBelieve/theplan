@@ -6,13 +6,11 @@
   "main": "./dist/index.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "build": "tsup",
+    "build": "tsup-node",
     "type:check": "tsc --noemit",
-    "watch": "tsup --watch"
+    "watch": "tsup-node --watch"
   },
   "author": "I-Want-ToBelieve",
   "license": "MIT",
-  "dependencies": {
-    "conf": "^12.0.0"
-  }
+  "dependencies": {}
 }

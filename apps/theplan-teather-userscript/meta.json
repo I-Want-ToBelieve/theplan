@@ -1,0 +1,17 @@
+{
+  "namespace": "github.com/I-Want-ToBelieve",
+  "copyright": "2024, I-Want-ToBelieve (https://github.com/I-Want-ToBelieve)",
+  "require": [
+    "https://scriptcat.org/lib/637/1.3.3/ajaxHooker.js"
+  ],
+  "include": [
+    "https://www.makcoocode.com/*",
+    "https://gui.makcoocode.com/*"
+  ],
+  "run-at": "document-start",
+  "grant": [
+    "GM.setValue",
+    "GM.getValue",
+    "GM.registerMenuCommand"
+  ]
+}

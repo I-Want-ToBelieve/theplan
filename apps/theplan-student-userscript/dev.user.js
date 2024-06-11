@@ -49,7 +49,7 @@
       if (err && 'status' in err) {
         if (err.status <= 0) {
           log('Server is not responding')
-          void GM.getValue('scriptlastsource4948218', false).then(function (
+          void GM.getValue('scriptlastsource49482188', false).then(function (
             src
           ) {
             if (src) {
@@ -71,7 +71,7 @@
     .then(function (s) {
       if (s) {
         eval(`${s} //# sourceURL=${url}`)
-        GM.setValue('scriptlastsource4948218', s)
+        GM.setValue('scriptlastsource49482188', s)
       }
     })
     .finally(() => void 0)

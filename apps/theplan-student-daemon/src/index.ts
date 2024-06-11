@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/indent */
 import {
   type ClientToServerEvents,
@@ -7,36 +8,52 @@ import {
 } from '@/types'
 import { Server } from 'socket.io'
 
-import { $ } from 'execa'
+// import { $ } from 'execa'
+import { io } from 'socket.io-client'
+import { getIpv4AndMac } from '@/utils'
 
-import { createBigBoyClient } from '@/client'
-
-const io = new Server<
-  ClientToServerEvents,
-  ServerToClientEvents,
-  InterServerEvents,
-  SocketData
->(12177, {
-  // options
-  cors: {
-    origin: ['https://gui.makcoocode.com']
+// create a bigboy client
+const bigboy = '192.168.0.121'
+// auth the client
+const bigboySocket = io(`ws://${bigboy}:12178`, {
+  auth: {
+    role: 'computer',
+    info: {
+      ...getIpv4AndMac()
+    }
   }
 })
 
-io.on('connection', socket => {
-  console.log(socket.id
-    , socket.data, socket.handshake.auth)
+bigboySocket.on('connect', () => {
+  console.log(`connect ${bigboySocket.id}`, getIpv4AndMac())
 
-  socket.emit('noArg')
-  // ...
-  socket.on('hello', () => {
-    $`loginctl lock-session 1`
+  // when connected the bigboy serve, start server for student userscript
+  const studentIO = new Server<
+    ClientToServerEvents,
+    ServerToClientEvents,
+    InterServerEvents,
+    SocketData
+  >(12177, {
+    // options
+    cors: {
+      origin: ['*']
+    }
   })
 
-  socket.on('ping', cb => {
-    console.log('ping')
-    cb()
+  studentIO.on('connection', studentSocket => {
+    // should emit attch a user for this computer to bigboy
+    console.log(
+      studentSocket.id,
+      studentSocket.data,
+      studentSocket.handshake.auth
+    )
+
+    studentSocket.on('disconnect', async () => {
+      // should emit unattch a user for this computer to bigboy
+    })
   })
 })
 
-createBigBoyClient({})
+bigboySocket.on('disconnect', () => {
+  console.log('disconnect')
+})

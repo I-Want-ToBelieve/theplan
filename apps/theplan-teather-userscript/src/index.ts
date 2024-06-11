@@ -6,6 +6,8 @@ import { Manager } from 'socket.io-client'
 import { isXiaoMai, isMakcooCode } from '@/utils/constant'
 import { batchAddStudent } from '@/features/batch-add-student'
 import { observableMemberInit } from '@/features/hooks/hook-member-init'
+import { addOneClickLogin } from '@/features/add-oneclick-login'
+import { observableAllStudent } from '@/features/hooks/hook-all-student'
 
 const bigboy = '192.168.0.121'
 const manager = new Manager(`ws://${bigboy}:12178`, {
@@ -39,6 +41,8 @@ export const main = async () => {
     //
   } else if (isMakcooCode) {
     batchAddStudent()
+
+    // 老师登录则通知给中转机
     observableMemberInit.subscribe((v: any) => {
       socket.disconnect()
       const json = JSON.parse(v.response)
@@ -51,6 +55,13 @@ export const main = async () => {
       socket.auth = { userInfo }
 
       socket.connect()
+    })
+
+    // 进入班级页面则添加一键登录和学生登录监控
+    observableAllStudent.subscribe((v: any) => {
+      const json = JSON.parse(v.response)
+      console.log('observableAllStudent json', json)
+      addOneClickLogin()
     })
   }
 

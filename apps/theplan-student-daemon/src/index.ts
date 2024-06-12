@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/indent */
 import {
   type ClientToServerEvents,
-  type InterServerEvents,
   type ServerToClientEvents,
   type SocketData
 } from '@/types'
@@ -31,7 +30,6 @@ bigboySocket.on('connect', () => {
   const studentIO = new Server<
     ClientToServerEvents,
     ServerToClientEvents,
-    InterServerEvents,
     SocketData
   >(12177, {
     // options

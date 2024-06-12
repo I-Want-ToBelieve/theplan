@@ -53,7 +53,7 @@ export const main = async () => {
 
       const { user_info: userInfo } = data
 
-      socket.auth = { userInfo }
+      socket.auth = { role: 'teather', info: userInfo }
 
       socket.connect()
     })

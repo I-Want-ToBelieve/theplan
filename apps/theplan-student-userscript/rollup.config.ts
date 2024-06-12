@@ -10,6 +10,7 @@ import { defineConfig } from 'rollup'
 import tscAlias from 'rollup-plugin-tsc-alias'
 import metablock from 'rollup-plugin-userscript-metablock'
 import typescript from 'typescript'
+import userScriptCss from 'rollup-plugin-userscript-css'
 
 import pkg from './package.json'
 
@@ -59,7 +60,8 @@ export default defineConfig({
         author: pkg.author,
         license: pkg.license
       }
-    } as any)
+    } as any),
+    userScriptCss()
   ],
   external (id) {
     return /^react(-dom)?$/.test(id)

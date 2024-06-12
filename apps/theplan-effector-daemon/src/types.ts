@@ -1,18 +1,47 @@
+export interface Student {
+  role: 'student'
+  info: {
+    hash_id: string
+    userid: number
+    username: string
+    real_name: string
+  }
+}
+
+export interface Teather {
+  role: 'teather'
+  info: {
+    hash_id: string
+    userid: number
+    username: string
+    real_name: string
+  }
+}
+
+export interface Computer {
+  role: 'computer'
+  info: {
+    ipv4: string
+    mac: number
+    interface: string
+  }
+}
+
+export interface ActiveingComputer extends Computer {
+  student?: Student
+  isAwake?: boolean
+}
+
 export interface ServerToClientEvents {
-  noArg: () => void
-  basicEmit: (a: number, b: string, c: Buffer) => void
-  withAck: (d: string, callback: (e: number) => void) => void
+  lock: () => void
+  unlock: () => void
+  openBrowserLoginTheStudent: (student: Student) => void
 }
 
 export interface ClientToServerEvents {
-  hello: () => void
-  ping: (cb: any) => void
-}
-
-export interface InterServerEvents {
-  ping: () => void
+  attachStudentToComputer: (student: Student) => void
 }
 
 export interface SocketData {
-  auth: any
+  auth: Computer | Teather
 }

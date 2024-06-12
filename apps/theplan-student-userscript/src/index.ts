@@ -18,19 +18,9 @@ socket.on('connect', () => {
   console.log(`connect ${socket.id}`)
 })
 
-setInterval(() => {
-  socket.emit('ping', () => {
-    console.log('pong')
-  })
-}, 10000)
-
 socket.on('disconnect', () => {
   console.log('disconnect')
 })
-
-setTimeout(() => {
-  socket.emit('hello')
-}, 15000)
 
 export const main = async () => {
   console.log('hello', window.location.origin, isXiaoMai, isMakcooCode)
@@ -39,6 +29,7 @@ export const main = async () => {
     //
   } else if (isMakcooCode) {
     removeBadLock()
+    // 学生登录通知给中转机
     observableMemberInit.subscribe((v) => {
       socket.disconnect()
       const json = JSON.parse(v.response)
@@ -48,7 +39,7 @@ export const main = async () => {
 
       const { user_info: userInfo } = data
 
-      socket.auth = { userInfo }
+      socket.auth = { role: 'student', info: userInfo }
 
       socket.connect()
     })

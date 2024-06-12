@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsup-node",
     "type:check": "tsc --noemit",
-    "watch": "tsup-node --watch"
+    "watch": "tsup-node --watch",
+    "watch:dist": "nodemon ./dist/index.js"
   },
   "author": "I-Want-ToBelieve",
   "license": "MIT",

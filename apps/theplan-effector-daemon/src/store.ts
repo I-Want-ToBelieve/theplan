@@ -6,7 +6,7 @@ export class Store {
   public teather: Teather[] = []
   public computer: ActiveingComputer[] = []
 
-  public attachStudentToComputer (mac: Pick<ActiveingComputer['info'], 'mac'>, student: Student) {
+  public attachStudentToComputer (mac: number, student: Student) {
     this.computer = this.computer.map((it) => {
       if (it.info.mac === mac) {
         return {
@@ -22,7 +22,7 @@ export class Store {
   /**
    * changeComputerAwakeState
   */
-  public changeComputerAwakeState (mac: Pick<ActiveingComputer['info'], 'mac'>, isAwake: Pick<ActiveingComputer, 'isAwake'>) {
+  public changeComputerAwakeState (mac: number, isAwake: boolean) {
     this.computer = this.computer.map((it) => {
       if (it.info.mac === mac) {
         return {
@@ -34,8 +34,6 @@ export class Store {
       return it
     })
   }
-
-  t
 
   public addComputer (computer: ActiveingComputer) {
     this.computer.push(computer)

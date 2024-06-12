@@ -81,6 +81,47 @@
           scripts.hello.exec = "echo $GREET";
           scripts.up.exec = "ncu -i";
 
+          scripts."theplan-effector-daemon:watch".exec = ''
+            cd $DEVENV_ROOT/apps/theplan-effector-daemon
+            pnpm run watch
+          '';
+
+          scripts."theplan-effector-daemon:run".exec = ''
+            cd $DEVENV_ROOT/apps/theplan-effector-daemon
+            pnpm run watch:dist
+          '';
+
+          scripts."theplan-student-daemon:watch".exec = ''
+            cd $DEVENV_ROOT/apps/theplan-student-daemon
+            pnpm run watch
+          '';
+
+          scripts."theplan-student-daemon:run".exec = ''
+            cd $DEVENV_ROOT/apps/theplan-student-daemon
+            pnpm run watch:dist
+          '';
+
+          scripts."theplan-student-userscript:run".exec = ''
+            cd $DEVENV_ROOT/apps/theplan-student-userscript
+            pnpm run serve
+          '';
+
+          scripts."theplan-teather-userscript:run".exec = ''
+            cd $DEVENV_ROOT/apps/theplan-teather-userscript
+            pnpm run serve
+          '';
+
+          scripts."onclick".exec = ''
+            cd $DEVENV_ROOT
+            sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-effector-daemon:watch\n"' &
+            sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-effector-daemon:run\n"' &
+            sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-student-daemon:watch\n"' &
+            sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-student-daemon:run\n"' &
+            sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-student-userscript:run\n"' &
+            sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-teather-userscript:run\n"' &
+            zellij --session theplan || zellij attach theplan
+          '';
+
           scripts."git-user:setup".exec = ''
             git config user.name I-Want-ToBelieve
             git config user.email i.want.tobelieve.dev@gmail.com

@@ -3,7 +3,7 @@ import { observe } from '@violentmonkey/dom'
 import Toastify from 'toastify-js'
 import './toastify.css'
 
-export const addOneClickLogin = (data: any) => {
+export const addOneClickLogin = (_data: any) => {
   const addButtonToBox = () => {
     if (window.location.hash.includes('classroom_management')) {
       const box = document.querySelector('div.teaching-management div.operation')

@@ -8,5 +8,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["./src/*", "./tsup.config.ts"]
+  "include": ["./src", "./tsup.config.ts"]
 }

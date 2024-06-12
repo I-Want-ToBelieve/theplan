@@ -60,7 +60,7 @@ export default defineConfig({
         author: pkg.author,
         license: pkg.license
       }
-    } as any),
+    }),
     userScriptCss()
   ],
   external (id) {

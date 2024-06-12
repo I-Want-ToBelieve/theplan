@@ -1,10 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "jsx": "react-jsx",
     // add Bun type definitions
-    "types": ["bun-types"],
+    "types": [],
     // enable latest features
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM"],
     "module": "esnext",
     "target": "esnext",
     // if TS 5.x+
@@ -25,5 +26,6 @@
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["./apps/**/**/*.ts"]
+  "include": ["./types/**/*.ts", "./**/*.json"],
+  "files": ["./**/*.json"]
 }

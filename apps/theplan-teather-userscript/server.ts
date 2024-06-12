@@ -90,7 +90,7 @@ console.log(
 
 loadConfigFile(path.resolve(__dirname, 'rollup.config.ts'), {
   configPlugin: 'typescript'
-}).then(async ({ options }: { options }) => {
+}).then(async ({ options }: { options: any }) => {
   // Start rollup watch
   const watcher = rollup.watch(options)
 

@@ -88,3 +88,8 @@ declare module '@violentmonkey/dom' {
    */
   export declare function observe (node: Node, callback: (mutations: MutationRecord[], observer: MutationObserver) => boolean | void, options?: MutationObserverInit): () => void
 }
+
+declare module '*.json' {
+  const value: any
+  export default value
+}

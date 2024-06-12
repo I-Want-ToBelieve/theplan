@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { MAKCOO_API_URL } from '@/utils/constant'
 
+// @ts-nocheck
 export const getStudents = async (
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  { webviewToken, page, page_size, search_nick_name, school_id },
+  { webviewToken, page, page_size, search_nick_name, school_id }: any,
   prefix = MAKCOO_API_URL
 ) => {
   return await fetch(

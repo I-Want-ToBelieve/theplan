@@ -12,7 +12,7 @@
   "include": [
     "./src",
     "./*.ts",
-    "./**/*.json",
+    "./*.json",
     "index.d.ts",
     "../../types/GM/index.d.ts"
   ]

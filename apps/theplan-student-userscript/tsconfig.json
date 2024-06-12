@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "sourceMap": true,
     // paths
     "outDir": "./dist",
     "baseUrl": ".",
@@ -12,6 +13,7 @@
     "./src",
     "./*.ts",
     "./*.json",
+    "index.d.ts",
     "../../types/GM/index.d.ts"
   ]
 }

@@ -26,6 +26,5 @@
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["./types/**/*.ts", "./**/*.json"],
-  "files": ["./**/*.json"]
+  "include": ["./types/**/*.ts", "./**/*.json"]
 }

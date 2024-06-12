@@ -114,9 +114,9 @@
           scripts."onclick".exec = ''
             cd $DEVENV_ROOT
             sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-effector-daemon:watch\n"' &
-            sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-effector-daemon:run\n"' &
+            sh -c $'sleep 3.14;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-effector-daemon:run\n"' &
             sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-student-daemon:watch\n"' &
-            sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-student-daemon:run\n"' &
+            sh -c $'sleep 3.14;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-student-daemon:run\n"' &
             sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-student-userscript:run\n"' &
             sh -c $'sleep 0.314;zellij -s theplan -s theplan action write-chars "zellij run -- theplan-teather-userscript:run\n"' &
             zellij --session theplan || zellij attach theplan

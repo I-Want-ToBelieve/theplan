@@ -3,13 +3,15 @@ import { observe } from '@violentmonkey/dom'
 
 export const addLockAndUnlock = (data: any, socket: any) => {
   const boxSeletor = 'img.student-controller'
-  const lister = (evt) => {
-    console.log(evt, data)
+  const lister = (evt: any) => {
+    console.log('evt.target.src.includes(click-to-unlock)', evt, data, Object.keys(data?.users ?? []))
 
-    if (evt.target.src.include('click-to-unlock')) {
-      socket.emit('lock', Object.keys(data?.data?.users ?? []))
-    } else if (evt.target.src.include('click-to-lock')) {
-      socket.emit('unlock', Object.keys(data?.data?.users ?? []))
+    if (evt.target.src.includes('click-to-unlock')) {
+      console.log('emit unlock', Object.keys(data?.users ?? []))
+      socket.emit('unlock', Object.keys(data?.users ?? []))
+    } else if (evt.target.src.includes('click-to-lock')) {
+      console.log('emit lock', Object.keys(data?.users ?? []))
+      socket.emit('lock', Object.keys(data?.users ?? []))
     }
   }
 

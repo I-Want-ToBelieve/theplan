@@ -47,17 +47,19 @@ io.on('connection', async socket => {
   })
 
   socket.on('lock', (studentHashIds) => {
+    console.log('lock lock lock studentHashIds:', studentHashIds)
     for (const id of studentHashIds) {
       for (const mac of store.getMacsByStudentHashId(id)) {
-        io.in(mac).emit('lock')
+        io.to(mac).emit('lock')
       }
     }
   })
 
   socket.on('unlock', (studentHashIds) => {
+    console.log('unlock unlock unlock studentHashIds:', studentHashIds)
     for (const id of studentHashIds) {
       for (const mac of store.getMacsByStudentHashId(id)) {
-        io.in(mac).emit('unlock')
+        io.to(mac).emit('unlock')
       }
     }
   })

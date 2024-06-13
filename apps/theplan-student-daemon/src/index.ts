@@ -51,12 +51,12 @@ bigboySocket.on('connect', () => {
 
 bigboySocket.on('lock', async () => {
   console.log('bigboySocket lock')
-  await $`loginctl session lock-session 1`
+  await $`loginctl lock-session 1`
 })
 
 bigboySocket.on('unlock', async () => {
   console.log('bigboySocket unlock')
-  await $`loginctl session unlock-session 1`
+  await $`loginctl unlock-session 1`
 })
 
 bigboySocket.on('disconnect', () => {

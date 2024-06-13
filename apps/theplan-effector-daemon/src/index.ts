@@ -41,9 +41,14 @@ io.on('connection', async socket => {
     store.attachStudentToComputer(socket.data.id, student)
   })
 
+  socket.on('unAttachStudentToComputer', (student) => {
+    console.log('unAttachStudentToComputer', student)
+    store.unAttachStudentToComputer(socket.data.id, student)
+  })
+
   socket.on('lock', (studentHashIds) => {
     for (const id of studentHashIds) {
-      for (const mac of getMacsByStudentHashId(id)) {
+      for (const mac of store.getMacsByStudentHashId(id)) {
         io.in(mac).emit('lock')
       }
     }
@@ -51,7 +56,7 @@ io.on('connection', async socket => {
 
   socket.on('unlock', (studentHashIds) => {
     for (const id of studentHashIds) {
-      for (const mac of getMacsByStudentHashId(id)) {
+      for (const mac of store.getMacsByStudentHashId(id)) {
         io.in(mac).emit('unlock')
       }
     }

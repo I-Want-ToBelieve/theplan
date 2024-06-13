@@ -19,6 +19,19 @@ export class Store {
     })
   }
 
+  public unAttachStudentToComputer (mac: string, _student: Student) {
+    this.computer = this.computer.map((it) => {
+      if (it.info.mac === mac) {
+        return {
+          ...it,
+          student: undefined
+        }
+      }
+
+      return it
+    })
+  }
+
   /**
    * changeComputerAwakeState
   */
@@ -38,7 +51,7 @@ export class Store {
   /* B
    * getMacByStudentHashID
    */
-  public getMacsByStudentHashId (studentHashId) {
+  public getMacsByStudentHashId (studentHashId: string) {
     return this.computer.filter((it) => {
       return it.student?.info.hash_id === studentHashId
     }).map((it) => {

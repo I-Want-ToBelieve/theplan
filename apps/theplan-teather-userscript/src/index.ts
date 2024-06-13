@@ -9,6 +9,8 @@ import { observableMemberInit } from '@/features/hooks/hook-member-init'
 import { addOneClickLogin } from '@/features/add-oneclick-login'
 import { observableAllStudent } from '@/features/hooks/hook-all-student'
 import { addResetStudentPassword } from '@/features/add-reset-student-passwd'
+import { observableChallengeProgress } from '@/features/hooks/hook-challenge-progress'
+import { addLockAndUnlock } from '@/features/add-lock-and-unlock'
 
 const bigboy = '192.168.0.121'
 const manager = new Manager(`ws://${bigboy}:12178`, {
@@ -21,19 +23,9 @@ socket.on('connect', () => {
   console.log(`connect ${socket.id}`)
 })
 
-setInterval(() => {
-  socket.emit('ping', () => {
-    console.log('pong')
-  })
-}, 10000)
-
 socket.on('disconnect', () => {
   console.log('disconnect')
 })
-
-setTimeout(() => {
-  socket.emit('hello')
-}, 15000)
 
 export const main = async () => {
   console.log('hello', window.location.origin, isXiaoMai, isMakcooCode)
@@ -66,6 +58,13 @@ export const main = async () => {
       addOneClickLogin(json?.data?.list ?? [])
 
       addResetStudentPassword(json?.data?.list ?? [])
+    })
+
+    observableChallengeProgress.subscribe((v: any) => {
+      const json = JSON.parse(v.response)
+      console.log('observableChallengeProgress json', json)
+
+      addLockAndUnlock(json.data ?? {}, socket)
     })
   }
 

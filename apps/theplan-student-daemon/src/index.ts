@@ -46,6 +46,10 @@ bigboySocket.on('connect', () => {
       studentSocket.handshake.auth
     )
 
+    if (studentSocket.handshake.auth?.role === 'student') {
+      bigboySocket.emit('attachStudentToComputer', studentSocket.handshake.auth)
+    }
+
     studentSocket.on('disconnect', async () => {
       // should emit unattch a user for this computer to bigboy
     })

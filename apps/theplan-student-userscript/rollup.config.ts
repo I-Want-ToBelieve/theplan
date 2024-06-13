@@ -7,12 +7,14 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import replace from '@rollup/plugin-replace'
 import typescriptPlugin from '@rollup/plugin-typescript'
 import { defineConfig } from 'rollup'
+/* @ts-expect-error: Unreachable code error */
 import tscAlias from 'rollup-plugin-tsc-alias'
 import metablock from 'rollup-plugin-userscript-metablock'
 import typescript from 'typescript'
+/* @ts-expect-error: Unreachable code error */
 import userScriptCss from 'rollup-plugin-userscript-css'
 
-import pkg from './package.json'
+import * as pkg from './package.json' assert { type : 'json' }
 
 fs.mkdir('dist/', { recursive: true }, () => null)
 

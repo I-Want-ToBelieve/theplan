@@ -19,19 +19,6 @@ export class Store {
     })
   }
 
-  public unAttachStudentToComputer (mac: string, _student: Student) {
-    this.computer = this.computer.map((it) => {
-      if (it.info.mac === mac) {
-        return {
-          ...it,
-          student: undefined
-        }
-      }
-
-      return it
-    })
-  }
-
   /**
    * changeComputerAwakeState
   */

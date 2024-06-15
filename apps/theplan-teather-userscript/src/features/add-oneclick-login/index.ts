@@ -3,7 +3,7 @@ import { observe } from '@violentmonkey/dom'
 import Toastify from 'toastify-js'
 import './toastify.css'
 
-export const addOneClickLogin = (_data: any) => {
+export const addOneClickLogin = (scoket, data: any) => {
   const addButtonToBox = () => {
     if (window.location.hash.includes('classroom_management')) {
       const box = document.querySelector('div.teaching-management div.operation')
@@ -17,9 +17,11 @@ export const addOneClickLogin = (_data: any) => {
 
         oneClickLoginButton.textContent = '一键上号'
         oneClickLoginButton.addEventListener('click', (it) => {
-          console.log(it, '一键上号被点了')
+          console.log(it, '一键上号被点了', data)
+
+          scoket.volatile.emit('openBrowserLoginTheStudent', data)
           Toastify({
-            text: 'This is a toast',
+            text: '一键上号正在执行',
             className: 'info',
             style: {
               background: 'linear-gradient(to right, #00b09b, #96c93d)'

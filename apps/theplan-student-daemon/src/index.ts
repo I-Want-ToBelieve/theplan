@@ -24,6 +24,12 @@ bigboySocket.on('connect', () => {
 
   // when connected the bigboy serve, start server for student userscript
   const studentIO = new Server(12177, {
+    connectionStateRecovery: {
+      // the backup duration of the sessions and the packets
+      maxDisconnectionDuration: 2 * 60 * 1000,
+      // whether to skip middlewares upon successful recovery
+      skipMiddlewares: true
+    },
     // options
     cors: {
       origin: ['*']
@@ -44,7 +50,7 @@ bigboySocket.on('connect', () => {
 
     studentSocket.on('disconnect', async () => {
       // should emit unattch a user for this computer to bigboy
-      bigboySocket.emit('unAttachStudentToComputer', studentSocket.handshake.auth)
+      // bigboySocket.emit('unAttachStudentToComputer', studentSocket.handshake.auth)
     })
   })
 })

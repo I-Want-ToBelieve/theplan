@@ -47,7 +47,7 @@ export interface ClientToServerEvents {
   lock: (student_hash_ids: string[]) => void
   unlock: (student_hash_ids: string[]) => void
   attachStudentToComputer: (student: Student) => void
-  unAttachStudentToComputer: (student: Student) => void
+  openBrowserLoginTheStudent: (student: Student[]) => void
 }
 
 export interface SocketData {

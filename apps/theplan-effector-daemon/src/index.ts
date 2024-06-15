@@ -9,8 +9,7 @@ import {
 } from '@/types'
 import { Server } from 'socket.io'
 import { Store } from '@/store'
-
-// import { $ } from 'execa'
+import { schools } from '@/data/rooms'
 
 const store = new Store()
 const io = new Server<
@@ -19,6 +18,12 @@ const io = new Server<
   InterServerEvents,
   SocketData
 >(12178, {
+  connectionStateRecovery: {
+    // the backup duration of the sessions and the packets
+    maxDisconnectionDuration: 2 * 60 * 1000,
+    // whether to skip middlewares upon successful recovery
+    skipMiddlewares: true
+  },
   // options
   cors: {
     origin: ['*']
@@ -41,11 +46,6 @@ io.on('connection', async socket => {
     store.attachStudentToComputer(socket.data.id, student)
   })
 
-  socket.on('unAttachStudentToComputer', (student) => {
-    console.log('unAttachStudentToComputer', student)
-    store.unAttachStudentToComputer(socket.data.id, student)
-  })
-
   socket.on('lock', (studentHashIds) => {
     console.log('lock lock lock studentHashIds:', studentHashIds)
     for (const id of studentHashIds) {
@@ -61,6 +61,21 @@ io.on('connection', async socket => {
       for (const mac of store.getMacsByStudentHashId(id)) {
         io.to(mac).emit('unlock')
       }
+    }
+  })
+
+  socket.on('openBrowserLoginTheStudent', (students) => {
+    console.log('openBrowserLoginTheStudent students:', students)
+    const schoolsOne = schools.one
+    const room = schoolsOne.rooms['10']
+
+    const hosts = room.hosts
+    const hostsMaxIndex = hosts.length - 1
+
+    for (const [index, it] of students.entries()) {
+        const host = hosts[Math.min(index, hostsMaxIndex)]
+        // should wake up first
+        io.to(host.mac).emit('openBrowserLoginTheStudent', it)
     }
   })
 

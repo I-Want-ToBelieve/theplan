@@ -66,14 +66,11 @@ bigboySocket.on('unlock', async () => {
   await $`loginctl unlock-session`
 })
 
-bigboySocket.on('', async ({
-  username,
-  password
-}) => {
+bigboySocket.on('openBrowserLoginTheStudent', async (student: any) => {
   console.log('bigboySocket autologin')
   await autologin({
-    username,
-    password
+    username: student.username,
+    password: student.username
   })
 })
 

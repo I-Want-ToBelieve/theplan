@@ -6,6 +6,7 @@ import { Server } from 'socket.io'
 import { io } from 'socket.io-client'
 import { getIpv4AndMac } from '@/utils'
 import { $ } from 'execa'
+import { autologin } from '@/autologin'
 
 // create a bigboy client
 const bigboy = '192.168.0.121'
@@ -63,6 +64,17 @@ bigboySocket.on('lock', async () => {
 bigboySocket.on('unlock', async () => {
   console.log('bigboySocket unlock')
   await $`loginctl unlock-session`
+})
+
+bigboySocket.on('', async ({
+  username,
+  password
+}) => {
+  console.log('bigboySocket autologin')
+  await autologin({
+    username,
+    password
+  })
 })
 
 bigboySocket.on('disconnect', () => {

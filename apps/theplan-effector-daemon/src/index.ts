@@ -74,8 +74,9 @@ io.on('connection', async socket => {
 
     for (const [index, it] of students.entries()) {
         const host = hosts[Math.min(index, hostsMaxIndex)]
+        console.log('host.mac host.mac', host.mac)
         // should wake up first
-        io.to(host.mac).emit('openBrowserLoginTheStudent', it)
+        io.to(host.mac.toLowerCase()).emit('openBrowserLoginTheStudent', it)
     }
   })
 

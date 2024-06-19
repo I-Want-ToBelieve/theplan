@@ -15,7 +15,7 @@ export const addResetStudentPassword = (data: any) => {
 
         resetStudentPasswordButton.id = id
 
-        resetStudentPasswordButton.textContent = '重置学生密码为学生账号'
+        resetStudentPasswordButton.textContent = '重置学生密码'
         resetStudentPasswordButton.addEventListener('click', (it) => {
           console.log(it, '重置密码被点了', data)
 

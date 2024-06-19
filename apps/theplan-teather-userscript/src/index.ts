@@ -55,7 +55,7 @@ export const main = async () => {
       const json = JSON.parse(v.response)
       console.log('observableAllStudent json', json)
 
-      addOneClickLogin(scoket, json?.data?.list ?? [])
+      addOneClickLogin(socket, json?.data?.list ?? [])
 
       addResetStudentPassword(json?.data?.list ?? [])
     })

@@ -55,7 +55,7 @@ export const schools = {
           },
           {
             ip: '192.168.0.105',
-            mac: '',
+            mac: 'EC:5C:68:6C:25:FF',
             remark: '6'
           },
           // {
@@ -65,12 +65,12 @@ export const schools = {
           // },
           {
             ip: '192.168.0.107',
-            mac: '',
+            mac: 'FC:01:7C:19:62:B5',
             remark: '8'
           },
           {
             ip: '192.168.0.108',
-            mac: '',
+            mac: '0C:96:E6:62:0C:4B',
             remark: '9'
           }
           // {
